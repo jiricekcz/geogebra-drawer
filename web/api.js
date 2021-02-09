@@ -5,7 +5,7 @@ export class Shard {
         this.socket.onmessage = message => {
             const d = JSON.parse(message.data);
             switch (d.type) {
-                case "event": this.emit(d.event.name, d.event.data);
+                case "event": this.emit(d.event.name, { timestamp: d.event.data.timestamp, file: new ggbFile(d.event.data.file) });
             }
         }
     }

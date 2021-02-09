@@ -47,6 +47,9 @@ declare namespace API {
         constructor(jsonFile: any);
 
     }
+    /**
+     * An interface for a 2D Vector
+     */
     declare interface Vector2D<X, Y> {
         x: X;
         y: Y;

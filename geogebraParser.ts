@@ -25,6 +25,7 @@ export default function parse(filename: string): Promise<ggbJSON> {
                 rv.yScale = coordSys.yscale;
                 rv.yZero = coordSys.yZero;
 
+
                 fs.writeFileSync("./ggbFile/geogebra.json", JSON.stringify(coordSys));
 
                 return resolve(rv);
