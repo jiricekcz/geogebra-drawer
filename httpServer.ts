@@ -1,6 +1,7 @@
 import http from 'http';
 import fs from 'fs';
 import path from 'path';
+import mime from 'mime';
 
 const onStartResolves: Array<() => void> = [];
 var startResolved: boolean = false;
@@ -22,7 +23,10 @@ export const server = http.createServer((req, res) => {
         res.end(fs.readFileSync(path.join(__dirname, "./web/404.html")).toString().replace("${fileurl}", url));
         return;
     }
-    res.writeHead(200, "content-type: text/html");
+
+    
+    res.setHeader('Content-Type', mime.getType(url) ?? "text/plain");
+    res.writeHead(200);
     res.end(fs.readFileSync(path.join(__dirname, "./web/", url)).toString().replace("${fileurl}", url))
 });
 

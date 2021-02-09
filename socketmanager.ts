@@ -1,18 +1,16 @@
 import ws from 'ws';
 import { ggbFile } from './types.d';
 
-export default class SocketManager extends Array<ws> {
-    readonly onSocket: (socket: ws) => void;
-    constructor(onSocket: (socket?: ws) => void = () => {}) {
-        super();
-        this.onSocket = onSocket;
+export class SocketManager {
+    readonly sockets: Array<ws>;
+    constructor() {
+        this.sockets = [];
     }
     addSocket(socket: ws): void {
-        this.push(socket);
-        this.onSocket(socket);
+        this.sockets.push(socket);
     }
     sendAll(data: any): void {
-        for (const s of this) {
+        for (const s of this.sockets) {
             s.send(JSON.stringify(data));
         }
     }

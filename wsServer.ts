@@ -1,5 +1,5 @@
 import ws from 'ws';
-import SocketManager from './socketmanager';
+import { SocketManager } from './socketmanager';
 
 const onStartResolves: Array<() => void> = [];
 var startResolved: boolean = false;
