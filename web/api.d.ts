@@ -11,11 +11,35 @@ declare namespace API {
          */
         readonly eventOns: eventListeners;
         constructor();
-        on(event: "fileUpdate", listener: (file: ggbFile) => void);
-        emit(event: "fileUpdate", file: ggbFile): void;
+        /**
+         * Event emited when the ggb file has changed
+         * @param event The event name 
+         * @param listener The function that should be executed when the event occurs
+         * @example
+         * const sahrd = new API.Shard();
+         * 
+         * shard.on("fileUpdate", event => {
+         *      console.log(new Date(event.timestamp));
+         * });
+         */
+        on(event: "fileUpdate", listener: (file: ggbFileUpdateEvent) => void);
+        emit(event: "fileUpdate", file: ggbFileUpdateEvent): void;
     }
     declare interface EventListeners {
-        fileUpdate: Array<(file: ggbFile) => void>;
+        fileUpdate: Array<(file: ggbFileUpdateEvent) => void>;
+    }
+    /**
+     * Event emited when the ggb file has changed
+     */
+    declare interface ggbFileUpdateEvent {
+        /**
+         * The time when the file was changed
+         */
+        timestamp: number;
+        /**
+         * The file itself
+         */
+        file: ggbFile;
     }
     declare class ggbFile {
         constructor(jsonFile: any);
