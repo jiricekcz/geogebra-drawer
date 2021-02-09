@@ -44,8 +44,10 @@ declare namespace API {
     declare class ggbFile {
         readonly scale: Vector2D<number, number>;
         readonly zero: Vector2D<number, number>;
+        readonly points: Array<Point>;
+        readonly commands: Array<Command>;
+        readonly labels: Array<Label>;
         constructor(jsonFile: any);
-
     }
     /**
      * An interface for a 2D Vector
@@ -54,5 +56,23 @@ declare namespace API {
         x: X;
         y: Y;
     }
+    /**
+     * Class representing a point, that should be drawn on the canvas
+     */
+    declare class Point {
+        readonly x: number;
+        readonly y: number;
+        readonly label: Label;
+        constructor(x: number, y: number, label: Label);
+    }
+    /**
+     * Class representing a command used to creeate more elements
+     */
+    declare interface Command {
+        readonly name: string;
+        readonly inputs: Array<Label>;
+        readonly outputs: Array<Label>;
+    }
+    declare type Label = string;
 }
 export = API;
