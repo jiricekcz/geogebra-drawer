@@ -1,6 +1,7 @@
 import childProcess from 'child_process';
 import * as socketServer from './wsServer';
 import * as httpServer from './httpServer';
+import * as fileListener from './fileListener';
 
 async function main() {
     console.log("Server script started.");
@@ -15,15 +16,9 @@ async function main() {
     await wait(1000);
     childProcess.execSync("start http://localhost:4205/")
     console.log("Browser tab opened.");
-    setInterval(() => {
-        socketServer.sockets.emitEvent("fileUpdate", {
-            file: {
-
-            },
-            timestamp: Date.now()
-        });
-    }, 1000)
-
+    fileListener.onFileChange("./ggbFile/geogebra-export.ggb", buf => {
+        console.log("New file!");
+    })
 }
 function wait(ms: number): Promise<void> {
     return new Promise<void>((resolve, reject) => {
