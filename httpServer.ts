@@ -17,10 +17,13 @@ export const server = http.createServer((req, res) => {
     if (!req.url) return;
     if (req.url?.endsWith("/")) req.url += "index.html";
     const url = req.url.split('?')[0];
-    if (!fs.existsSync(path.join(__dirname, url))) {
+    if (!fs.existsSync(path.join(__dirname, "./web/", url))) {
         res.writeHead(404);
-        res.end(fs.readFileSync(path.join(__dirname, "./web/404.html")).toString().replace("${fileurl}", url))
+        res.end(fs.readFileSync(path.join(__dirname, "./web/404.html")).toString().replace("${fileurl}", url));
+        return;
     }
+    res.writeHead(200, "content-type: text/html");
+    res.end(fs.readFileSync(path.join(__dirname, "./web/", url)).toString().replace("${fileurl}", url))
 });
 
 server.listen(4205, () => {
