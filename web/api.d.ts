@@ -42,7 +42,14 @@ declare namespace API {
         file: ggbFile;
     }
     declare class ggbFile {
+        readonly scale: Vector2D<number, number>;
+        readonly zero: Vector2D<number, number>;
         constructor(jsonFile: any);
+
+    }
+    declare interface Vector2D<X, Y> {
+        x: X;
+        y: Y;
     }
 }
 export = API;

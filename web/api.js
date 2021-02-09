@@ -20,3 +20,15 @@ export class Shard {
         this.eventOns[event].push(fc);
     }
 }
+export class ggbFile {
+    constructor(json) {
+        this.scale = {
+            x: json.xScale,
+            y: json.yScale
+        }
+        this.zero = {
+            x: json.xZero,
+            y: json.yZero
+        }
+    }
+}
