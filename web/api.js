@@ -5,7 +5,8 @@ export class Shard {
         this.socket.onmessage = message => {
             const d = JSON.parse(message.data);
             switch (d.type) {
-                case "event": this.emit(d.event.name, { timestamp: d.event.data.timestamp, file: new ggbFile(d.event.data.file) });
+                case "event":
+                    this.emit(d.event.name, { timestamp: d.event.data.timestamp, file: new ggbFile(d.event.data.file) });
             }
         }
     }
@@ -23,17 +24,17 @@ export class Shard {
 export class ggbFile {
     constructor(json) {
         this.scale = {
-            x: json.xScale,
-            y: json.yScale
+            x: Number(json.xScale),
+            y: Number(json.yScale)
         }
         this.zero = {
-            x: json.xZero,
-            y: json.yZero
+            x: Number(json.xZero),
+            y: Number(json.yZero)
         }
         this.points = [];
         for (var el of json.elements) {
             if (el.type === "point") {
-                this.points.push(new Point(el.x, el.y, el.label));
+                this.points.push(new Point(Number(el.x), Number(el.y), el.label));
             }
         }
         this.commands = [];
