@@ -23,6 +23,10 @@ async function main() {
         let parsed = await geogebraParser("./ggbFile/geogebra-export.ggb");
         socketServer.sockets.emitEvent("fileUpdate", {timestamp: Date.now(), file: parsed});
     })
+    socketServer.sockets.on("new", async () => {
+        let parsed = await geogebraParser("./ggbFile/geogebra-export.ggb");
+        socketServer.sockets.emitEvent("fileUpdate", {timestamp: Date.now(), file: parsed});
+    })
 }
 function wait(ms: number): Promise<void> {
     return new Promise<void>((resolve, reject) => {
