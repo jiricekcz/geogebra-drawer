@@ -29,6 +29,7 @@ export class SocketManager {
     }
     emit(event: "new"): void;
     emit(event: string, ...args: any[]): void {
+        if (!this.listeners[event]) this.listeners[event] = [];
         for (var h of this.listeners[event]) {
             h(...args);
         } 
